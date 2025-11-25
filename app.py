@@ -12,7 +12,7 @@ st.title("CRC NAIP 2011 NDVI Viewer (Leafmap Version)")
 url = "https://github.com/aish-chan/Lily_test/blob/main/CRC_NAIP_2011_NDVI.tif"
 filename = "CRC_NAIP_2011_NDVI.tif"
 
-leafmap.download_file(url, filename, quiet=TRUE)
+leafmap.download_file(url, filename)
 
 
 # ---------------------------------------------------
