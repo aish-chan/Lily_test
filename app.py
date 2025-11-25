@@ -3,6 +3,7 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import leafmap.foliumap as leafmap
+import localtileserver
 
 st.title("CRC NAIP 2011 NDVI Viewer (Leafmap Version)")
 
