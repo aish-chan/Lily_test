@@ -8,3 +8,4 @@ mapclassify
 Pillow
 numpy
 xarray
+rasterio
