@@ -5,5 +5,5 @@ matplotlib
 leafmap[folium] # or leafmap
 requests
 mapclassify
-PIL
+Pillow
 numpy
