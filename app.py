@@ -9,11 +9,11 @@ st.title("CRC NAIP 2011 NDVI Viewer (Leafmap Version)")
 # ---------------------------------------------------
 # 1) Load NDVI TIFF (relative path is cloud safe)
 # ---------------------------------------------------
-tif_path = "CRC_NAIP_2011_NDVI.tif"
+url = "https://github.com/aish-chan/Lily_test/blob/main/CRC_NAIP_2011_NDVI.tif"
+filename = "CRC_NAIP_2011_NDVI.tif"
 
+leafmap.download_file(url1, filename, quiet=TRUE)
 
-img = Image.open(tif_path)
-ndvi = np.array(img)
 
 # ---------------------------------------------------
 # 2) Geospatial Bounds
@@ -50,7 +50,7 @@ m = leafmap.Map(center=((top+bottom)/2, (left+right)/2), zoom=15)
 
 # Add NDVI using the built-in leafmap.add_raster()
 m.add_raster(
-    tif_path,
+    filename,
     colormap=ndvi_colors,
     vmin=-1,
     vmax=1,
