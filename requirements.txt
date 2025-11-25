@@ -9,3 +9,4 @@ Pillow
 numpy
 xarray
 rasterio
+localtileserver
