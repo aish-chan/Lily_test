@@ -7,6 +7,8 @@ import localtileserver
 from localtileserver import TileClient, get_leaflet_tile_layer, examples, get_folium_tile_layer
 from ipyleaflet import Map
 import rasterio 
+import geemap
+
 st.title("CRC NAIP 2011 NDVI Viewer (Leafmap Version)")
 
 # ---------------------------------------------------
@@ -14,8 +16,6 @@ st.title("CRC NAIP 2011 NDVI Viewer (Leafmap Version)")
 # ---------------------------------------------------
 url = "https://github.com/aish-chan/Lily_test/blob/main/CRC_NAIP_2011_NDVI.tif"
 filename = "CRC_NAIP_2011_NDVI.tif"
-
-"CRC_NAIP_2011_NDVI.tif"
 
 img = Image.open(filename)
 ndvi = np.array(img)
@@ -26,12 +26,6 @@ src = rasterio.open("CRC_NAIP_2011_NDVI.tif")
 crs = src.crs
 array = src.read()
 print(array.shape)
-
-# First, create a tile server from local raster file
-client = TileClient("CRC_NAIP_2011_NDVI.tif")
-
-# Create ipyleaflet tile layer from that server
-t = get_leaflet_tile_layer(client)
 
 # ---------------------------------------------------
 # 2) Geospatial Bounds
@@ -64,11 +58,12 @@ ndvi_colors = [
 # ---------------------------------------------------
 # 4) Build Leafmap map
 # ---------------------------------------------------
-m = leafmap.Map(center=((top+bottom)/2, (left+right)/2), zoom=15)
+m = geemap.Map(center=((top+bottom)/2, (left+right)/2), zoom=15)
 
 # Add NDVI using the built-in leafmap.add_raster()
 m.add_raster(
-    t,
+    filename,
+    bounds=bbox,
     colormap=ndvi_colors,
     vmin=-1,
     vmax=1,
