@@ -15,4 +15,3 @@ setuptools
 psutil
 rasterio
 rioxarray
-geemap
