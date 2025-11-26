@@ -62,7 +62,6 @@ m = leafmap.Map(center=((top+bottom)/2, (left+right)/2), zoom=15)
 # Add NDVI using the built-in leafmap.add_raster()
 m.add_raster(
     filename,
-    bounds=bbox,
     colormap=ndvi_colors,
     vmin=-1,
     vmax=1,
