@@ -17,7 +17,7 @@ filename = "CRC_NAIP_2011_NDVI.tif"
 img = Image.open(filename)
 ndvi = np.array(img)
 
-
+ndvi1 = leafmap.download_file(url, "CRC_NAIP_2011_NDVI.tif")
 # ---------------------------------------------------
 # 2) Geospatial Bounds
 # ---------------------------------------------------
@@ -53,7 +53,7 @@ m = leafmap.Map(center=((top+bottom)/2, (left+right)/2), zoom=15)
 
 # Add NDVI using the built-in leafmap.add_raster()
 m.add_raster(
-    filename,
+    ndvi1,
     colormap=ndvi_colors,
     vmin=-1,
     vmax=1,
