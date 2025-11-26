@@ -67,7 +67,7 @@ m.add_raster(
     vmax=1,
     layer_name="NDVI"
 )
-
+m.add_raster(ndvi_image, colormap="Greens", layer_name="NDVI2")
 
 # ---------------------------------------------------
 # 5) Add Legend
