@@ -19,8 +19,6 @@ filename = "CRC_NAIP_2011_NDVI.tif"
 img = Image.open(filename)
 ndvi = np.array(img)
 
-ndvi1 = leafmap.download_file(url, "CRC_NAIP_2011_NDVI.tif")
-
 src = rasterio.open("CRC_NAIP_2011_NDVI.tif")
 crs = src.crs
 array = src.read()
@@ -61,7 +59,8 @@ m = leafmap.Map(center=((top+bottom)/2, (left+right)/2), zoom=15)
 
 # Add NDVI using the built-in leafmap.add_raster()
 m.add_raster(
-    filename,
+    image=np.moveaxis(array, 0, -1),
+    crs = crs,
     colormap=ndvi_colors,
     vmin=-1,
     vmax=1,
