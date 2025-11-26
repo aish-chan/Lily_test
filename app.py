@@ -22,7 +22,7 @@ ndvi = np.array(img)
 
 ndvi1 = leafmap.download_file(url, "CRC_NAIP_2011_NDVI.tif")
 
-src = rasterio.open(filename)
+src = rasterio.open("CRC_NAIP_2011_NDVI.tif")
 crs = src.crs
 array = src.read()
 print(array.shape)
