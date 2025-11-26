@@ -23,6 +23,7 @@ ndvi = np.array(img)
 ndvi1 = leafmap.download_file(url, "CRC_NAIP_2011_NDVI.tif")
 
 src = rasterio.open(filename)
+crs = src.crs
 array = src.read()
 print(array.shape)
 bounds = src.bounds
@@ -65,7 +66,8 @@ m = leafmap.Map(center=((top+bottom)/2, (left+right)/2), zoom=15)
 
 # Add NDVI using the built-in leafmap.add_raster()
 m.add_raster(
-    array,
+    image=np.moveaxis(array, 0, -1),
+    crs = crs,
     colormap=ndvi_colors,
     vmin=-1,
     vmax=1,
