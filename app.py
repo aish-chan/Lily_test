@@ -21,6 +21,11 @@ ndvi = np.array(img)
 
 ndvi1 = leafmap.download_file(url, "CRC_NAIP_2011_NDVI.tif")
 
+dataset = rasterio.open(ndvi1)
+nd_vi = dataset.read(1).astype(float)
+
+ndvi_image = leafmap.array_to_image(nd_vi, source=ndvi1)
+
 # ---------------------------------------------------
 # 2) Geospatial Bounds
 # ---------------------------------------------------
@@ -56,7 +61,7 @@ m = leafmap.Map(center=((top+bottom)/2, (left+right)/2), zoom=15)
 
 # Add NDVI using the built-in leafmap.add_raster()
 m.add_raster(
-    ndvi1,
+    ndvi_image,
     colormap=ndvi_colors,
     vmin=-1,
     vmax=1,
