@@ -28,7 +28,7 @@ array = src.read()
 print(array.shape)
 
 # First, create a tile server from local raster file
-client = TileClient(url)
+client = TileClient("CRC_NAIP_2011_NDVI.tif")
 
 # Create ipyleaflet tile layer from that server
 t = get_leaflet_tile_layer(client)
