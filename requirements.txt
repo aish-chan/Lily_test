@@ -11,4 +11,4 @@ xarray
 rasterio
 localtileserver
 ipyleaflet
-pkg_resources
+setuptools
