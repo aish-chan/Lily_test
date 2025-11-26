@@ -26,10 +26,12 @@ src = rasterio.open(filename)
 crs = src.crs
 array = src.read()
 print(array.shape)
-bounds = src.bounds
 
-x1,y1,x2,y2 = src.bounds
-bbox = [(bounds.bottom, bounds.left), (bounds.top, bounds.right)]
+# First, create a tile server from local raster file
+client = TileClient(filename)
+
+# Create ipyleaflet tile layer from that server
+t = get_leaflet_tile_layer(client)
 
 # ---------------------------------------------------
 # 2) Geospatial Bounds
@@ -66,13 +68,13 @@ m = leafmap.Map(center=((top+bottom)/2, (left+right)/2), zoom=15)
 
 # Add NDVI using the built-in leafmap.add_raster()
 m.add_raster(
-    image=np.moveaxis(array, 0, -1),
-    crs = crs,
+    t,
     colormap=ndvi_colors,
     vmin=-1,
     vmax=1,
     layer_name="NDVI"
 )
+
 
 # ---------------------------------------------------
 # 5) Add Legend
