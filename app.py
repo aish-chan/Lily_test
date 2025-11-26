@@ -6,6 +6,7 @@ import leafmap.foliumap as leafmap
 import localtileserver
 from localtileserver import TileClient, get_leaflet_tile_layer, examples, get_folium_tile_layer
 from ipyleaflet import Map
+import rasterio 
 st.title("CRC NAIP 2011 NDVI Viewer (Leafmap Version)")
 
 # ---------------------------------------------------
@@ -23,6 +24,7 @@ ndvi1 = leafmap.download_file(url, "CRC_NAIP_2011_NDVI.tif")
 
 src = rasterio.open(filename)
 array = src.read()
+print(array.shape)
 bounds = src.bounds
 
 x1,y1,x2,y2 = src.bounds
