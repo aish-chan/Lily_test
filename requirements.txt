@@ -12,3 +12,4 @@ rasterio
 localtileserver
 ipyleaflet
 setuptools
+psutil
