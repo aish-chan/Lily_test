@@ -63,7 +63,7 @@ bbox = [(bottom, left), (top, right)]
 
 st.title("Plotting maps!")
 # center on Liberty Bell
-m = folium.Map(zoom_start=6)
+m = folium.Map([38.268114, -109.628493], zoom_start=6)
 
 # add marker for Liberty Bell
 tooltip = "Utah city"
