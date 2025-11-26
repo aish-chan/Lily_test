@@ -7,8 +7,6 @@ import localtileserver
 from localtileserver import TileClient, get_leaflet_tile_layer, examples, get_folium_tile_layer
 from ipyleaflet import Map
 import rasterio 
-from streamlit_folium import folium_static
-import folium
 
 st.title("CRC NAIP 2011 NDVI Viewer (Leafmap Version)")
 
@@ -20,6 +18,8 @@ filename = "CRC_NAIP_2011_NDVI.tif"
 
 img = Image.open(filename)
 ndvi = np.array(img)
+
+ndvi1 = leafmap.download_file(url, "CRC_NAIP_2011_NDVI.tif")
 
 src = rasterio.open("CRC_NAIP_2011_NDVI.tif")
 crs = src.crs
@@ -57,25 +57,16 @@ ndvi_colors = [
 # ---------------------------------------------------
 # 4) Build Leafmap map
 # ---------------------------------------------------
-x1,y1,x2,y2 = src.bounds
-bbox = [(bottom, left), (top, right)]
+m = leafmap.Map(center=((top+bottom)/2, (left+right)/2), zoom=15)
 
-
-st.title("Plotting maps!")
-# center on Liberty Bell
-m = folium.Map([38.268114, -109.628493], zoom_start=6)
-
-# add marker for Liberty Bell
-tooltip = "Utah city"
-
-img = folium.raster_layers.ImageOverlay(
-    name="NDVI",
-    image=np.moveaxis(array, 0, -1),
+# Add NDVI using the built-in leafmap.add_raster()
+m.add_raster(
+    filename,
     bounds=bbox,
-    opacity=0.9,
-    interactive=True,
-    cross_origin=False,
-    zindex=1,
+    colormap=ndvi_colors,
+    vmin=-1,
+    vmax=1,
+    layer_name="NDVI"
 )
 
 
@@ -95,17 +86,12 @@ legend_dict = {
     "0.8 – 1.0": "#012E01",
 }
 
-# m.add_legend(title="NDVI", legend_dict=legend_dict)
+m.add_legend(title="NDVI", legend_dict=legend_dict)
 
 # ---------------------------------------------------
 # 6) Display in Streamlit
 # ---------------------------------------------------
-# folium.Popup("I am an image").add_to(img)
-
-folium.LayerControl().add_to(m)
-
-# call to render Folium map in Streamlit
-folium_static(m)
+m.to_streamlit(height=500)
 
 # ---------------------------------------------------
 # 7) NDVI Histogram
