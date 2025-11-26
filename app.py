@@ -58,7 +58,7 @@ ndvi_colors = [
 # 4) Build Leafmap map
 # ---------------------------------------------------
 x1,y1,x2,y2 = src.bounds
-bbox = [(bounds.bottom, bounds.left), (bounds.top, bounds.right)]
+bbox = [(bottom, left), (top, right)]
 
 
 st.title("Plotting maps!")
